@@ -44,34 +44,32 @@ router.post('/create-project', async (req, res) => {
 
 router.get('/project', async (req, res, next) => {
     try {
-        const id = req.body.id;
-        if (id) {
+        const id = req.query.id;
+        
             const project = await Project.findOne({ _id: id });
             try {
                 res.json(project)
             } catch (error) {
                 res.json({ error: error })
             }
-        } else {
-            res.json({ status: 204, message: "Id not provided" })
         }
-    } catch (error) {
+    catch (error) {
         res.json({ error: error })
     }
 })
 
 router.post('/update-project', async (req, res, next) => {
     try {
-        const id = req.body.id;
+        const id = req.body.data.id;
         if (id) {
             const oldProject = await Project.findById(id);
 
 
-            const title = req.body.title ? req.body.title : oldProject.title;
-            const typeOfApp = req.body.typeOfApp ? req.body.typeOfApp : oldProject.typeOfApp;
-            const info = req.body.info ? req.body.info : oldProject.info;
-            const tech = req.body.tech ? req.body.tech : oldProject.tech;
-            const status = req.body.status ? req.body.status : oldProject.status;
+            const title = req.body.data.title ? req.body.data.title : oldProject.title;
+            const typeOfApp = req.body.data.typeOfApp ? req.body.data.typeOfApp : oldProject.typeOfApp;
+            const description = req.body.data.description ? req.body.data.description : oldProject.description;
+            const tech = req.body.data.tech ? req.body.data.tech : oldProject.tech;
+            const status = req.body.data.status ? req.body.data.status : oldProject.status;
 
             Project.findOneAndUpdate({ _id: id },
                 {
@@ -79,7 +77,7 @@ router.post('/update-project', async (req, res, next) => {
                     {
                         title: title,
                         typeOfApp: typeOfApp,
-                        info: info,
+                        description: description,
                         tech: tech,
                         status: status
                     }
