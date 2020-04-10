@@ -22,7 +22,7 @@ app.use('/api/project',projectsRoute)
 
 //ROUTES
 app.get('/',(req,res) => {
-    res.send({status: 404, message: "Unhandled route"})
+    res.send("Home page")
 })
 
 
@@ -36,4 +36,4 @@ mongoose.connect(
 
 
 //Start listening to the server
-app.listen(2000);
+app.listen(process.env.PORT || 2000);
