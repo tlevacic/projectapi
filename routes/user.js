@@ -3,7 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Project = require('../models/Project');
 const mongoose = require("mongoose")
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 var nodemailer = require('nodemailer');
 
